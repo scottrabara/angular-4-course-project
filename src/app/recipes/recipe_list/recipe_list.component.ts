@@ -19,4 +19,8 @@ export class recipeListComponent {
 	ngOnInit() {
 		this.recipes = this.recipeService.getRecipes();
 	}
+
+	// onNew() {
+	// 	this.router.navigate(['new']);
+	// }
 }
