@@ -1,6 +1,4 @@
 <app-header (headerSelected) = "onHeaderSelect($event)"></app-header>
 <div class="container">
-	<app-recipes *ngIf="isRecipes()"></app-recipes>
-	<hr>
-	<app-shopping-list *ngIf="isShoppingList()"></app-shopping-list>
+	<router-outlet></router-outlet>
 </div>
