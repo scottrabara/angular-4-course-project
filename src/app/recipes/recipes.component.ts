@@ -8,11 +8,5 @@ import { RecipeService } from './recipe.service';
 })
 
 export class recipesComponent {
-	recipeSelected: Recipe;
 
-	constructor(private recipeService: RecipeService) {
-		this.recipeService.recipeSelected.subscribe(
-			(recipe => this.recipeSelected = recipe)
-		);
-	}
 }

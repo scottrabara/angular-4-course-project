@@ -1,4 +1,5 @@
 import { EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 import { Ingredient } from '../shared/ingredient.model';
 
 export class ShoppingListService {
@@ -6,7 +7,7 @@ export class ShoppingListService {
 		new Ingredient ('Apples', 5),
 		new Ingredient ('Tomatoes', 5)
 	];
-	ingredientsChanged = new EventEmitter<Ingredient[]>();
+	ingredientsChanged = new Subject<Ingredient[]>();
 
 	getIngredients(){
 		return this.ingredients.slice();
@@ -14,10 +15,10 @@ export class ShoppingListService {
 
 	addIngredient(i: Ingredient){
 		this.ingredients.push(i);
-		this.ingredientsChanged.emit(this.ingredients.slice());
+		this.ingredientsChanged.next(this.ingredients.slice());
 	}
 	addIngredients(is: Ingredient[]){
 		this.ingredients.push(...is); //spread operator (...) ES6 functionality
-		this.ingredientsChanged.emit(this.ingredients.slice());
+		this.ingredientsChanged.next(this.ingredients.slice());
 	}
 }
