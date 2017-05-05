@@ -7,11 +7,21 @@ export class ShoppingListService {
 		new Ingredient ('Apples', 5),
 		new Ingredient ('Tomatoes', 5)
 	];
+	ingredientEdit = new Subject<number>();
 	ingredientsChanged = new Subject<Ingredient[]>();
 
 	getIngredients(){
 		return this.ingredients.slice();
 	}
+
+	getIngredient(i: number) {
+		return this.ingredients.slice()[i];
+	}
+
+	editIngredient(i: number) {
+		this.ingredientEdit.next(i);
+	}
+
 
 	addIngredient(i: Ingredient){
 		this.ingredients.push(i);
