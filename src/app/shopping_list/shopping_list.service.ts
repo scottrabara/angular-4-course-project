@@ -27,8 +27,19 @@ export class ShoppingListService {
 		this.ingredients.push(i);
 		this.ingredientsChanged.next(this.ingredients.slice());
 	}
+
 	addIngredients(is: Ingredient[]){
 		this.ingredients.push(...is); //spread operator (...) ES6 functionality
+		this.ingredientsChanged.next(this.ingredients.slice());
+	}
+
+	updateIngredient(i: number, newIngredient: Ingredient) {
+		this.ingredients[i] = newIngredient;
+		this.ingredientsChanged.next(this.ingredients.slice());
+	}
+
+	deleteIngredient(i: number) {
+		this.ingredients.splice(i, 1);
 		this.ingredientsChanged.next(this.ingredients.slice());
 	}
 }

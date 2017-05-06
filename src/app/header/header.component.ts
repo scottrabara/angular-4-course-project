@@ -7,9 +7,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 
 export class headerComponent {
-	@Output() headerSelected = new EventEmitter<string>();
+	// @Output() headerSelected = new EventEmitter<string>();
 
-	onSelected(redirect: string) {
-		this.headerSelected.emit(redirect);
-	}
+	// onSelected(redirect: string) {
+	// 	this.headerSelected.emit(redirect);
+	// }
 }

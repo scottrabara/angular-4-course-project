@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { Ingredient } from '../../shared/ingredient.model'
 import { ShoppingListService } from '../../shopping_list/shopping_list.service';
@@ -9,9 +9,10 @@ import { ShoppingListService } from '../../shopping_list/shopping_list.service';
 	styleUrls: ['./shopping_list_edit.css']
 })
 
-export class shoppingListEditComponent implements OnInit {
+export class shoppingListEditComponent implements OnInit, OnDestroy {
 	ingredientForm: FormGroup;
 	editMode: boolean = false;
+	editModeIndex: number;
 	constructor(private shoppingListService: ShoppingListService) {}
 
 	ngOnInit() {
@@ -23,23 +24,48 @@ export class shoppingListEditComponent implements OnInit {
 		this.shoppingListService.ingredientEdit.subscribe(
 			(i) => {
 				this.editMode = true;
+				this.editModeIndex = i;
 				this.ingredientForm.setValue({
 					'name': this.shoppingListService.getIngredient(i).name,
 					'amount': this.shoppingListService.getIngredient(i).amount
 				});
+				this.ingredientForm.get('name').disable();
 			}
 		);
+
+		// this.ingredientForm.valueChanges.subscribe(
+		// 	(changes) => {
+		// 		console.log(changes.name);
+		// 		this.editMode = false;
+		// 	}
+		// );
 	}
 
 	onAddIngredient() {
-		this.shoppingListService.addIngredient(
-			new Ingredient(this.ingredientForm.get('name').value, 
-						   this.ingredientForm.get('amount').value));
-		this.ingredientForm.reset();
-		this.editMode = false;
+		const ingredient = new Ingredient(this.ingredientForm.get('name').value, 
+						   this.ingredientForm.get('amount').value);
+
+		if (this.editMode) {
+			this.shoppingListService.updateIngredient(this.editModeIndex, ingredient);
+		}
+		else {
+			this.shoppingListService.addIngredient(ingredient);
+		}
+		this.onClear();
 	}
 
-	onIngredientFormSubmit() {
-		console.log(this.ingredientForm.value);
+	onDelete() {
+		this.shoppingListService.deleteIngredient(this.editModeIndex);
+		this.onClear();
+	}
+
+	onClear() {
+		this.editMode = false;
+		this.ingredientForm.get('name').enable();
+		this.ingredientForm.reset();
+	}
+
+	ngOnDestroy() {
+		this.shoppingListService.ingredientEdit.unsubscribe;
 	}
 }
