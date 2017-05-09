@@ -3,26 +3,30 @@ import {Recipe} from './recipe.model';
 import {Ingredient} from '../shared/ingredient.model';
 import {Subject} from 'rxjs/Subject';
 import {ShoppingListService} from '../shopping_list/shopping_list.service';
+import {Http, Response} from '@angular/Http';
+import 'rxjs/Rx';
 
 @Injectable()
 export class RecipeService {
 
-	private recipes: Recipe[] = [
-	new Recipe('Chicken Soup', 
-			   'Delicious', 
-			   'http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-09.jpg',
-			   [new Ingredient('Chicken', 2),
-			    new Ingredient('Red Soup', 1)]),
-	new Recipe('Lasagna', 
-			   'Italian!', 
-			   'http://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/7/25/2/FNM_090112-Weeknight-Lasagna-Dinner-Recipe_s4x3.jpg.rend.hgtvcom.966.725.jpeg',
-			   [new Ingredient('Lasagna Sheet', 2),
-			    new Ingredient('Beef', 10)])
-	];
-
+	private recipes: Recipe[] = [];
+	// = [
+	// new Recipe('Chicken Soup', 
+	// 		   'Delicious', 
+	// 		   'http://www.seriouseats.com/images/2015/09/20150914-pressure-cooker-recipes-roundup-09.jpg',
+	// 		   [new Ingredient('Chicken', 2),
+	// 		    new Ingredient('Red Soup', 1)]),
+	// new Recipe('Lasagna', 
+	// 		   'Italian!', 
+	// 		   'http://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/7/25/2/FNM_090112-Weeknight-Lasagna-Dinner-Recipe_s4x3.jpg.rend.hgtvcom.966.725.jpeg',
+	// 		   [new Ingredient('Lasagna Sheet', 2),
+	// 		    new Ingredient('Beef', 10)])
+	// ];
+ 
 	recipesChanges = new Subject<Recipe[]>();
 
-	constructor(private slService: ShoppingListService) {}
+	constructor(private slService: ShoppingListService,
+				private http: Http) {}
 
 	getRecipes() {
 		return this.recipes.slice(); //returns copy of array
@@ -44,5 +48,32 @@ export class RecipeService {
 	updateRecipe(i: number, newRecipe: Recipe) {
 		this.recipes[i] = newRecipe;
 		this.recipesChanges.next(this.recipes.slice());
+	}
+
+	deleteRecipe(i: number) {
+		this.recipes.splice(i, 1);
+		this.recipesChanges.next(this.recipes.slice());	
+	}
+
+	saveRecipes(recipes: Recipe[]) {
+		return this.http.put('https://ng-recipe-book-srabara.firebaseio.com/data.json', recipes)
+			.map(
+				(response: Response) => {
+					const data = response.json();
+					return data;
+				}
+			);
+	}
+
+	fetchRecipes() {
+		return this.http.get('https://ng-recipe-book-srabara.firebaseio.com/data.json')
+			.map(
+				(response: Response) => {
+					const data = response.json();
+					this.recipes = data;
+					this.recipesChanges.next(this.recipes.slice());	
+					return data;
+				}
+			);
 	}
 }

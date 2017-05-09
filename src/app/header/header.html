@@ -2,7 +2,7 @@
 <div class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a routerLink="/" class="navbar-brand">Recipe Book</a>
+			<a routerLink="/recipes" class="navbar-brand">Recipe Book</a>
 		</div>
 		<div class="navbar-default">
 			<ul class="nav navbar-nav">
@@ -13,8 +13,8 @@
 				<li appDropdown class="dropdown">
 				<a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage</a>
 					<ul class="dropdown-menu">
-						<li><a style="cursor: pointer;">Save Data</a></li>
-						<li><a style="cursor: pointer;">Fetch Data</a></li>
+						<li><a style="cursor: pointer;" (click)="onSave()">Save Data</a></li>
+						<li><a style="cursor: pointer;" (click)="onFetch()">Fetch Data</a></li>
 					</ul>
 				</li>
 			</ul>

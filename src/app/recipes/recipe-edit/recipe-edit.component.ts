@@ -87,6 +87,10 @@ export class RecipeEditComponent implements OnInit {
       this.rService.addRecipe(newRecipe);
     }
 
+    this.onCancel();
+  }
+
+  onCancel() {
     this.router.navigate(['..']);
   }
 }
