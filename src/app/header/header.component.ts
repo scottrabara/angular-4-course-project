@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipes/recipe.service';
 import { Response } from '@angular/http';
 import { DataStorageService } from '../shared/data-storage.service';
@@ -9,7 +9,7 @@ import { DataStorageService } from '../shared/data-storage.service';
   styleUrls: ['./header.css']
 })
 
-export class headerComponent {
+export class headerComponent implements OnInit {
 	// @Output() headerSelected = new EventEmitter<string>();
 
 	// onSelected(redirect: string) {
@@ -18,11 +18,16 @@ export class headerComponent {
 	constructor(private data: DataStorageService,
 				private rService: RecipeService) {}
 
+	ngOnInit() {
+		this.onFetch();
+		
+	}
 	onSave() {
 		this.data.saveRecipes(this.rService.getRecipes());
 	}
 
 	onFetch() {
-		this.data.fetchRecipes();
+		this.rService.fetchRecipes();
+		
 	}
 }
