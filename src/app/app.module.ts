@@ -23,6 +23,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { ShenanigansComponent } from './shenanigans/shenanigans.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { environment } from '../environments/environment';
     DropdownDirective,
     RecipeEditComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
+    ShenanigansComponent
   ],
   imports: [
     BrowserModule,

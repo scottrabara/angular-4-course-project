@@ -44,5 +44,4 @@ export class DataStorageService {
 		// 	);
 		return this.db.list('/data');
 	}
-
 }

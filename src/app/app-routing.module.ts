@@ -5,6 +5,7 @@ import { recipeDetailComponent } from './recipes/recipe_list/recipe_item/recipe_
 import { recipesComponent } from './recipes/recipes.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { ShenanigansComponent } from './shenanigans/shenanigans.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
@@ -18,6 +19,8 @@ const appRoutes: Routes = [
   },
   { path: 'shopping-list',
     component: shoppingListComponent},
+  { path: 'shenanigans',
+    component: ShenanigansComponent},
   { path: 'signup',
     component: SignupComponent}
 ]; 
