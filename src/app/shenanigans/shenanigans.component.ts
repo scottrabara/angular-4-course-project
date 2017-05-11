@@ -14,11 +14,12 @@ export class ShenanigansComponent implements OnInit {
   constructor(private db: AngularFireDatabase) { }
 
   ngOnInit() {
-    this.messages.push("Computer: Hello, start typing!");
+    //this.messages.push("Computer: Hello, start typing!");
     this.db.list('/messages').subscribe(
-      (messages: string[]) => {
+      (messages) => {
+        this.messages = [];
         for (let m of messages) {
-          this.messages.push(m);
+          this.messages.push(m.$value);
         }
       }
     );
@@ -27,8 +28,13 @@ export class ShenanigansComponent implements OnInit {
     });
   }
 
+  onAdd() {
+    this.db.object('/messages').set(this.messages);
+  }
+
   onSubmit() {
     this.messages.push('Player 1: ' + this.messageForm.get('text').value);
+    this.onAdd();
     this.messageForm.reset();
   }
 
