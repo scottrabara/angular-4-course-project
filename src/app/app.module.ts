@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/Http';
+import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -15,8 +15,14 @@ import { recipesComponent } from './recipes/recipes.component';
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping_list/shopping_list.service';
 import { DropdownDirective } from './shared/dropdown.directive';
-import { SelectRecipeComponent } from './select-recipe/select-recipe.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { DataStorageService } from './shared/data-storage.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,17 +35,19 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     recipesComponent,
     headerComponent,
     DropdownDirective,
-    SelectRecipeComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    SignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [RecipeService, ShoppingListService],
+  providers: [DataStorageService, RecipeService, ShoppingListService, AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

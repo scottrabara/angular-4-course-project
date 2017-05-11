@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RecipeService } from '../recipes/recipe.service';
-import { Response } from '@angular/Http';
+import { Response } from '@angular/http';
+import { DataStorageService } from '../shared/data-storage.service';
 
 @Component ({
   selector: 'app-header',
@@ -14,23 +15,14 @@ export class headerComponent {
 	// onSelected(redirect: string) {
 	// 	this.headerSelected.emit(redirect);
 	// }
-	constructor(private rService: RecipeService) {}
+	constructor(private data: DataStorageService,
+				private rService: RecipeService) {}
 
 	onSave() {
-		this.rService.saveRecipes(this.rService.getRecipes())
-		.subscribe(
-			(response: Response) => {
-				console.log(response);
-			}
-		);
+		this.data.saveRecipes(this.rService.getRecipes());
 	}
 
 	onFetch() {
-		this.rService.fetchRecipes()
-		.subscribe(
-			(response: Response) => {
-				console.log(response);
-			}
-		);
+		this.data.fetchRecipes();
 	}
 }
