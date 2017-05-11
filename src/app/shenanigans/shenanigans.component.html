@@ -1,6 +1,6 @@
 
-<p *ngFor="let message of messages;">
-  {{message}}
+<p *ngFor="let message of messages">
+  {{message | async}}
 </p>
 <hr>
 <div class="col-md-4 col-xs-4">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'app-shenanigans',
@@ -10,11 +11,17 @@ export class ShenanigansComponent implements OnInit {
 
   messages: string[] = [];
   messageForm: FormGroup;
-  constructor() { }
+  constructor(private db: AngularFireDatabase) { }
 
   ngOnInit() {
     this.messages.push("Computer: Hello, start typing!");
-
+    this.db.list('/messages').subscribe(
+      (messages: string[]) => {
+        for (let m of messages) {
+          this.messages.push(m);
+        }
+      }
+    );
     this.messageForm = new FormGroup({
       'text': new FormControl('')
     });
