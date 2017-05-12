@@ -1,5 +1,5 @@
 
-<div>
+<div style="overflow-y: scroll; height: 150px;" #text>
   <p 
      *ngFor="let message of messages">
   {{message}}
@@ -20,7 +20,7 @@
 </div>
 <div class="row">
   <div class="col-md-12 col-xs-12">
-    <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="messageForm" (ngSubmit)="onSubmit()" autocomplete="off">
       <label for="text">Message</label>
       <input 
         class="form-control" 
