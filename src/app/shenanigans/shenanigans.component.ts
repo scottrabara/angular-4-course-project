@@ -11,6 +11,7 @@ export class ShenanigansComponent implements OnInit {
 
   messages: string[] = [];
   messageForm: FormGroup;
+  userName: string = '';
   constructor(private db: AngularFireDatabase) { }
 
   ngOnInit() {
@@ -33,9 +34,19 @@ export class ShenanigansComponent implements OnInit {
   }
 
   onSubmit() {
-    this.messages.push('Player 1: ' + this.messageForm.get('text').value);
+    this.messages.push(this.userName + ': ' + this.messageForm.get('text').value);
     this.onAdd();
     this.messageForm.reset();
+  }
+
+  onClearHistory() {
+    this.db.object('/messages').remove();
+  }
+
+  isUser(message: string) {
+    return {
+      'isUser': message.toUpperCase().indexOf(this.userName.toUpperCase()) > 0
+    };
   }
 
 }
