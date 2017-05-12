@@ -1,6 +1,6 @@
 # Angular 4 Course Project
 
-A sample course project to create a small recipe managing website using Firebase and AngularFire. 
+A sample course project to create a small recipe managing website using Angular 4, Firebase, and AngularFire. 
 
 Also includes a small chat app using Firebase as well for messages within the project.
 
