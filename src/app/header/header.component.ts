@@ -35,6 +35,7 @@ export class headerComponent implements OnInit {
 
 	onLogout() {
 		this.auth.signoutUser();
+		this.rService.fetchRecipes();
 	}
 
 	getAuth() {

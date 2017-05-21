@@ -45,6 +45,9 @@ export class RecipeService {
 				this.recipes = recipes;
 				this.updateRecipes(this.recipes.slice());
 				console.log(this.recipes.slice());
+			},
+			(error) => {
+				this.updateRecipes([]);
 			}
 		);
 	}

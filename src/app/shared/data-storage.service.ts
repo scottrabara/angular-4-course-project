@@ -3,15 +3,13 @@ import { Http, Response } from '@angular/http';
 import { Recipe } from '../recipes/recipe.model';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import 'rxjs/Rx';
-import { AuthService } from "app/auth/auth.service";
 
 
 @Injectable()
 export class DataStorageService {
 
 	constructor(private http: Http,
-				private db: AngularFireDatabase,
-				private auth: AuthService) {
+				private db: AngularFireDatabase) {
 	}
 
 	saveRecipes(recipes: Recipe[]) {

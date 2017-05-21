@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms/src/forms";
 import { AuthService } from "app/auth/auth.service";
+import { RecipeService } from "app/recipes/recipe.service";
 
 @Component({
   selector: 'app-signin',
@@ -9,7 +10,8 @@ import { AuthService } from "app/auth/auth.service";
 })
 export class SigninComponent implements OnInit {
 
-  constructor(private AuthService: AuthService) { }
+  constructor(private AuthService: AuthService,
+              private rService: RecipeService) { }
 
   ngOnInit() {
   }
