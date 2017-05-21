@@ -41,12 +41,12 @@ export class SigninComponent implements OnInit {
         //do not navigate away, retrieve error message
         //update the form controls, and output error
         this.error = error.message;
-        if (this.error.indexOf('email') > 0) {
+        if (this.error.toLocaleUpperCase().indexOf('EMAIL') > 0) {
           form.controls
           .email
           .setErrors({error: 'yes'});
         }
-        else if (this.error.indexOf('password') > 0) {
+        else if (this.error.toLocaleUpperCase().indexOf('PASSWORD') > 0) {
           form.controls
           .password
           .setErrors({error: 'yes'});
