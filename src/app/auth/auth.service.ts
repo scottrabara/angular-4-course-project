@@ -1,13 +1,15 @@
 import { AngularFireDatabase } from "angularfire2/database";
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "angularfire2/auth";
+import { Router } from "@angular/router";
 
 @Injectable()
 
 export class AuthService {
     token: string;
 
-    constructor(private auth: AngularFireAuth) {
+    constructor(private auth: AngularFireAuth,
+                private router: Router) {
         this.token = '';
     }
 
@@ -25,6 +27,7 @@ export class AuthService {
             .signInWithEmailAndPassword(email, password)
             .then(
                 response => {
+                    this.router.navigate(['/']);
                     console.log(response)
                     this.auth.app
                     .auth()
@@ -40,6 +43,10 @@ export class AuthService {
             ); 
     }
 
+    signoutUser() {
+        this.auth.app.auth().signOut();
+        this.token = '';
+    }
     // getToken() {
     //     this.auth.app
     //     .auth()
@@ -50,4 +57,9 @@ export class AuthService {
     //      );
     //      return this.token || '';
     // }
+
+    isAuthenticated() {
+        return this.auth.app.auth().currentUser != null;
+    }
+
 }

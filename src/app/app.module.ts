@@ -25,6 +25,7 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { ShenanigansComponent } from './shenanigans/shenanigans.component';
 import { AuthService } from "app/auth/auth.service";
+import { AuthGuard } from "app/auth/auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AuthService } from "app/auth/auth.service";
               ShoppingListService, 
               AngularFireDatabase,
               AuthService,
-              AngularFireAuth],
+              AngularFireAuth,
+              AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

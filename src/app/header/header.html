@@ -11,9 +11,16 @@
 				<li routerLinkActive="active"><a [routerLink]="['/shenanigans']">Shenanigans</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a routerLink="/signup">Register</a></li>
-				<li><a routerLink="/signin">Login</a></li>
-				<li appDropdown class="dropdown">
+				<ng-template [ngIf]="!getAuth()">
+					<li><a routerLink="/signup">Register</a></li>
+					<li><a routerLink="/signin">Login</a></li>
+				</ng-template>
+				<li>
+					<a style="cursor: pointer;" (click)="onLogout()" *ngIf="getAuth()">
+						Logout
+					</a>
+				</li>
+				<li appDropdown class="dropdown" *ngIf="getAuth()">
 				<a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage</a>
 					<ul class="dropdown-menu">
 						<li><a style="cursor: pointer;" (click)="onSave()">Save Data</a></li>
