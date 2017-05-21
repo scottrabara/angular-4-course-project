@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
@@ -7,11 +7,13 @@ import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable 
   templateUrl: './shenanigans.component.html',
   styleUrls: ['./shenanigans.component.css']
 })
-export class ShenanigansComponent implements OnInit {
+export class ShenanigansComponent implements OnInit, AfterViewChecked {
+
+  @ViewChild('text') textBox;
 
   messages: string[] = [];
   messageForm: FormGroup;
-  userName: string = '';
+  userName: string = 'RandomPerson' + Math.floor(Math.random() * + 10000);
   constructor(private db: AngularFireDatabase) { }
 
   ngOnInit() {
@@ -29,12 +31,23 @@ export class ShenanigansComponent implements OnInit {
     });
   }
 
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
   onAdd() {
     this.db.object('/messages').set(this.messages);
   }
 
+  getTime() {
+    return '[' + new Date().toLocaleTimeString() + ']';
+  }
+
   onSubmit() {
-    this.messages.push(this.userName + ': ' + this.messageForm.get('text').value);
+    this.messages.push(
+      this.getTime() + ' ' +
+      this.userName + ': ' + 
+      this.messageForm.get('text').value);
     this.onAdd();
     this.messageForm.reset();
   }
@@ -47,6 +60,10 @@ export class ShenanigansComponent implements OnInit {
     return {
       'isUser': message.toUpperCase().indexOf(this.userName.toUpperCase()) > 0
     };
+  }
+
+  scrollToBottom() {
+    this.textBox.nativeElement.scrollTop = this.textBox.nativeElement.scrollHeight;
   }
 
 }
