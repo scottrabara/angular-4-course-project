@@ -1,24 +1,26 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-shenanigans',
   templateUrl: './shenanigans.component.html',
   styleUrls: ['./shenanigans.component.css']
 })
-export class ShenanigansComponent implements OnInit, AfterViewChecked {
+export class ShenanigansComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   @ViewChild('text') textBox;
 
   messages: string[] = [];
+  sub: Subscription;
   messageForm: FormGroup;
   userName: string = 'RandomPerson' + Math.floor(Math.random() * + 10000);
   constructor(private db: AngularFireDatabase) { }
 
   ngOnInit() {
     //this.messages.push("Computer: Hello, start typing!");
-    this.db.list('/messages').subscribe(
+    this.sub = this.db.list('/messages').subscribe(
       (messages) => {
         this.messages = [];
         for (let m of messages) {
@@ -33,6 +35,10 @@ export class ShenanigansComponent implements OnInit, AfterViewChecked {
 
   ngAfterViewChecked() {
     this.scrollToBottom();
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   onAdd() {
