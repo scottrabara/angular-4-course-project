@@ -24,6 +24,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase, FirebaseListObservable 
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { ShenanigansComponent } from './shenanigans/shenanigans.component';
+import { AuthService } from "app/auth/auth.service";
 
 @NgModule({
   declarations: [
@@ -49,7 +50,12 @@ import { ShenanigansComponent } from './shenanigans/shenanigans.component';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [DataStorageService, RecipeService, ShoppingListService, AngularFireDatabase],
+  providers: [DataStorageService, 
+              RecipeService, 
+              ShoppingListService, 
+              AngularFireDatabase,
+              AuthService,
+              AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
