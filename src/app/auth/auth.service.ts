@@ -4,6 +4,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { DataStorageService } from "app/shared/data-storage.service";
 import { RecipeService } from "app/recipes/recipe.service";
+import * as firebase from 'firebase/app';
 
 @Injectable()
 
@@ -16,37 +17,19 @@ export class AuthService {
         this.token = '';
     }
 
-    signupUser(email: string, password: string) {
-        this.auth
+    signupUser(email: string, password: string): firebase.Promise<any> {
+        return this.auth
             .app
             .auth()
             .createUserWithEmailAndPassword(email, password);
+        
     }
 
     signinUser(email: string, password: string) {
-        this.auth
+        return this.auth
             .app
             .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(
-                response => {
-                    this.router.navigate(['/']);
-                    console.log(response)
-                    this.auth.app
-                    .auth()
-                    .currentUser
-                    .getToken()
-                    .then(
-                        (token: string) => {
-                            this.token = token
-                            this.rService.fetchRecipes();
-                        }
-                    );
-                }
-            )
-            .catch(
-                error => console.log(error)
-            ); 
+            .signInWithEmailAndPassword(email, password);
     }
 
     signoutUser() {

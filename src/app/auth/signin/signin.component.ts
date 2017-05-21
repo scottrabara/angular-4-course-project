@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms/src/forms";
 import { AuthService } from "app/auth/auth.service";
 import { RecipeService } from "app/recipes/recipe.service";
+import { Router } from "@angular/router/";
 
 @Component({
   selector: 'app-signin',
@@ -10,8 +11,11 @@ import { RecipeService } from "app/recipes/recipe.service";
 })
 export class SigninComponent implements OnInit {
 
+  error: string;
+
   constructor(private AuthService: AuthService,
-              private rService: RecipeService) { }
+              private rService: RecipeService,
+              private router: Router) { }
 
   ngOnInit() {
   }
@@ -22,6 +26,27 @@ export class SigninComponent implements OnInit {
 
     console.log(form.value.email);
     console.log(form.value.password);
-    this.AuthService.signinUser(email, password);
+    this.AuthService.signinUser(email, password)
+    .then(
+      () => {
+        this.rService.fetchRecipes();
+        this.router.navigate(['/']);
+      }
+    )
+    .catch(
+      error => {
+        this.error = error.message;
+        if (this.error.indexOf('email') > 0) {
+          form.controls
+          .email
+          .setErrors({error: 'yes'});
+        }
+        else if (this.error.indexOf('password') > 0) {
+          form.controls
+          .password
+          .setErrors({error: 'yes'});
+        }
+      }
+    );;
   }
 }

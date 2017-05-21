@@ -9,6 +9,7 @@
 				<label for="password">Password</label>
 				<input class="form-control" type="password" id="password" name ="password" ngModel>
 			</div>
+			<div class="help-block" *ngIf="error != null">{{error}}</div>
 			<button class="btn btn-primary" type="submit">Sign In</button>
 		</form>
 	</div>
