@@ -15,14 +15,16 @@ const appRoutes: Routes = [
     component: recipesComponent,
     children: [
       { path: 'new', component: RecipeEditComponent, canActivate: [AuthGuard] },
-      { path: ':id', component: recipeDetailComponent },
+      { path: ':id', component: recipeDetailComponent, canActivate: [AuthGuard]},
       { path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuard] }
     ]
   },
   { path: 'shopping-list',
-    component: shoppingListComponent},
+    component: shoppingListComponent,
+    canActivate: [AuthGuard] },
   { path: 'shenanigans',
-    component: ShenanigansComponent},
+    component: ShenanigansComponent,
+    canActivate: [AuthGuard] },
   { path: 'signup',
     component: SignupComponent},
   { path: 'signin',

@@ -7,8 +7,8 @@
 		<div class="navbar-default">
 			<ul class="nav navbar-nav">
 				<li routerLinkActive="active"><a [routerLink]="['/recipes']">Recipes</a></li>
-				<li routerLinkActive="active"><a [routerLink]="['/shopping-list']">Shopping List</a></li>
-				<li routerLinkActive="active"><a [routerLink]="['/shenanigans']">Shenanigans</a></li>
+				<li routerLinkActive="active" *ngIf="getAuth()"><a [routerLink]="['/shopping-list']">Shopping List</a></li>
+				<li routerLinkActive="active" *ngIf="getAuth()"><a [routerLink]="['/shenanigans']">Shenanigans</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<ng-template [ngIf]="!getAuth()">
