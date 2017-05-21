@@ -28,13 +28,18 @@ export class SigninComponent implements OnInit {
     console.log(form.value.password);
     this.AuthService.signinUser(email, password)
     .then(
+      // When successful
       () => {
+        //Fetch recipes and navigate back to root
         this.rService.fetchRecipes();
         this.router.navigate(['/']);
       }
     )
     .catch(
+      //if not successful
       error => {
+        //do not navigate away, retrieve error message
+        //update the form controls, and output error
         this.error = error.message;
         if (this.error.indexOf('email') > 0) {
           form.controls
