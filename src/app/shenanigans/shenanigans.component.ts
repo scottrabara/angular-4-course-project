@@ -8,6 +8,10 @@ import { Subscription } from "rxjs/Subscription";
   templateUrl: './shenanigans.component.html',
   styleUrls: ['./shenanigans.component.css']
 })
+
+// Currently uses own instance of AngularFireDatabase to connect to Firebase.
+// Need to change this to connect using the data-storage service and implement auth service as well
+
 export class ShenanigansComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   @ViewChild('text') textBox;
@@ -29,10 +33,21 @@ export class ShenanigansComponent implements OnInit, AfterViewChecked, OnDestroy
         }
       }
     );
+    this.userName = this.db.app.auth().currentUser.displayName;
     this.messageForm = new FormGroup({
       'text': new FormControl('')
     });
-    console.log(this.db.app.auth().currentUser);
+    // this.db.app
+    // .auth().onAuthStateChanged(
+    //   (user) => {
+    //     this.userName = user.displayName;
+    //   }
+    // );
+    this.db.app.auth().onAuthStateChanged(
+      () => {
+        this.userName = this.db.app.auth().currentUser.displayName;
+      }
+    );
   }
 
   ngAfterViewChecked() {
@@ -71,7 +86,9 @@ export class ShenanigansComponent implements OnInit, AfterViewChecked, OnDestroy
   }
 
   scrollToBottom() {
-    this.textBox.nativeElement.scrollTop = this.textBox.nativeElement.scrollHeight;
+    if (this.textBox != null) {
+      this.textBox.nativeElement.scrollTop = this.textBox.nativeElement.scrollHeight;
+    }
   }
 
 }

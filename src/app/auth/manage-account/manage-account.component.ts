@@ -12,7 +12,9 @@ export class ManageAccountComponent implements OnInit {
 
   user: User;
   verified: boolean = false;
+  updated: boolean = false;
   profileForm: FormGroup;
+  updatedTime: string;
   authState;
   message: string = "E-mail has not been verified! Click here to verify!";
 
@@ -52,4 +54,23 @@ export class ManageAccountComponent implements OnInit {
     this.message = "Verification Email has been sent, please check your inbox."
   }
 
+  onSubmit() {
+    const newUserName = this.profileForm.get('username').value;
+    this.user.updateProfile({displayName: newUserName, photoURL: this.user.photoURL})
+    .then(
+      () => {
+        console.log(this.user.displayName)
+      }
+    );
+    this.updatedTime = this.getTime();
+    this.updated = true;
+  }
+
+  isUpdated() {
+    return this.updated;
+  }
+
+  getTime() {
+    return '[' + new Date().toLocaleTimeString() + ']';
+  }
 }
