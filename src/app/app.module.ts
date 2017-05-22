@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,10 +27,8 @@ import { ShenanigansModule } from "app/shenanigans/shenanigans.module";
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     HttpModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     RecipesModule,
     ShoppingListModule,
     ShenanigansModule,
