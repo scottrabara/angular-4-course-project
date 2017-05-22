@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="!getAuth()">
 	<div class="col-xs-12">
 		<button [routerLink]="['new']" class="btn btn-success">New Recipe</button>
 		<hr>
