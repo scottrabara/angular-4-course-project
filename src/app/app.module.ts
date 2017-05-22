@@ -4,7 +4,6 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { headerComponent } from './header/header.component';
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping_list/shopping_list.service';
 import { DataStorageService } from './shared/data-storage.service';
@@ -18,13 +17,11 @@ import { SharedModule } from "app/shared/shared.module";
 import { ShoppingListModule } from "app/shopping_list/shopping-list.module";
 import { AuthModule } from "app/auth/auth.module";
 import { ShenanigansModule } from "app/shenanigans/shenanigans.module";
-import { HomeComponent } from './home/home.component';
+import { CoreModule } from "app/core/core.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    headerComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -33,16 +30,10 @@ import { HomeComponent } from './home/home.component';
     ShoppingListModule,
     ShenanigansModule,
     SharedModule,
+    CoreModule,
     AuthModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [DataStorageService, 
-              RecipeService, 
-              ShoppingListService, 
-              AngularFireDatabase,
-              AuthService,
-              AngularFireAuth,
-              AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

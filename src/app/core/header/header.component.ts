@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipeService } from '../recipes/recipe.service';
+import { RecipeService } from '../../recipes/recipe.service';
 import { Response } from '@angular/http';
-import { DataStorageService } from '../shared/data-storage.service';
+import { DataStorageService } from '../../shared/data-storage.service';
 import { AuthService } from "app/auth/auth.service";
 
 @Component ({
