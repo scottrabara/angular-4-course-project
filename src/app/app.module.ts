@@ -18,6 +18,7 @@ import { ShoppingListModule } from "app/shopping_list/shopping-list.module";
 import { AuthModule } from "app/auth/auth.module";
 import { ShenanigansModule } from "app/shenanigans/shenanigans.module";
 import { CoreModule } from "app/core/core.module";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { CoreModule } from "app/core/core.module";
     ShenanigansModule,
     SharedModule,
     CoreModule,
+    BrowserAnimationsModule,
     AuthModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],

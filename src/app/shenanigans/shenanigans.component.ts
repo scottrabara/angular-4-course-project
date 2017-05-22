@@ -15,7 +15,8 @@ export class ShenanigansComponent implements OnInit, AfterViewChecked, OnDestroy
   messages: string[] = [];
   sub: Subscription;
   messageForm: FormGroup;
-  userName: string = 'RandomPerson' + Math.floor(Math.random() * + 10000);
+  // userName: string = 'RandomPerson' + Math.floor(Math.random() * + 10000);
+  userName: string;
   constructor(private db: AngularFireDatabase) { }
 
   ngOnInit() {
@@ -31,6 +32,7 @@ export class ShenanigansComponent implements OnInit, AfterViewChecked, OnDestroy
     this.messageForm = new FormGroup({
       'text': new FormControl('')
     });
+    console.log(this.db.app.auth().currentUser);
   }
 
   ngAfterViewChecked() {

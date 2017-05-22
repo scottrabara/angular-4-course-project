@@ -23,6 +23,7 @@
 				<li appDropdown class="dropdown" *ngIf="getAuth()">
 				<a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage</a>
 					<ul class="dropdown-menu">
+						<li><a routerLink="/manage-account">Account</a></li>
 						<li><a style="cursor: pointer;" (click)="onSave()">Save Data</a></li>
 						<li><a style="cursor: pointer;" (click)="onFetch()">Fetch Data</a></li>
 					</ul>

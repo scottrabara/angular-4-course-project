@@ -52,4 +52,12 @@ export class AuthService {
         return this.auth.app.auth().currentUser != null;
     }
 
+    getUser() {
+        return this.auth.app.auth().currentUser;
+    }
+
+    getAuthState() {
+        return this.auth.authState;
+    }
+
 }
