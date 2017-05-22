@@ -7,15 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { shoppingListEditComponent } from './shopping_list/shopping_list_edit/shopping_list_edit.component';
 import { shoppingListComponent } from './shopping_list/shopping_list.component';
-import { recipeListComponent } from './recipes/recipe_list/recipe_list.component';
-import { recipeItemComponent } from './recipes/recipe_list/recipe_item/recipe_item.component';
-import { recipeDetailComponent } from './recipes/recipe_list/recipe_item/recipe_detail/recipe_detail.component';
 import { headerComponent } from './header/header.component';
-import { recipesComponent } from './recipes/recipes.component';
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping_list/shopping_list.service';
 import { DropdownDirective } from './shared/dropdown.directive';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { DataStorageService } from './shared/data-storage.service';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
@@ -26,19 +21,15 @@ import { environment } from '../environments/environment';
 import { ShenanigansComponent } from './shenanigans/shenanigans.component';
 import { AuthService } from "app/auth/auth.service";
 import { AuthGuard } from "app/auth/auth-guard.service";
+import { RecipesModule } from "app/recipes/recipes.module";
+import { SharedModule } from "app/shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     shoppingListEditComponent,
     shoppingListComponent,
-    recipeListComponent,
-    recipeItemComponent,
-    recipeDetailComponent,
-    recipesComponent,
     headerComponent,
-    DropdownDirective,
-    RecipeEditComponent,
     SignupComponent,
     SigninComponent,
     ShenanigansComponent
@@ -49,6 +40,8 @@ import { AuthGuard } from "app/auth/auth-guard.service";
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    RecipesModule,
+    SharedModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [DataStorageService, 
