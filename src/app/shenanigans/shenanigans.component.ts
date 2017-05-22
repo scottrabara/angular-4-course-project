@@ -38,12 +38,9 @@ export class ShenanigansComponent implements OnInit, AfterViewChecked, OnDestroy
     this.messageForm = new FormGroup({
       'text': new FormControl('')
     });
-    // this.db.app
-    // .auth().onAuthStateChanged(
-    //   (user) => {
-    //     this.userName = user.displayName;
-    //   }
-    // );
+    
+    //Whenever auth state changes (user logs in or logs out)
+    //ensure to update userName here
     this.db.app.auth().onAuthStateChanged(
       (user) => {
         if (user != null) {
