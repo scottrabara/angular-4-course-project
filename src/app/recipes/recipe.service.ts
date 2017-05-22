@@ -44,7 +44,7 @@ export class RecipeService {
 			(recipes) => {
 				this.recipes = recipes;
 				this.updateRecipes(this.recipes.slice());
-				console.log(this.recipes.slice());
+				//console.log(this.recipes.slice());
 			},
 			(error) => {
 				this.updateRecipes([]);
@@ -58,7 +58,7 @@ export class RecipeService {
 
 	addRecipe(r: Recipe) {
 		this.recipes.push(r);
-		console.log(this.recipes.slice());
+		//console.log(this.recipes.slice());
 		this.recipesChanges.next(this.recipes.slice());
 		this.dataStorageService.saveRecipes(this.recipes.slice());
 	}
@@ -66,7 +66,7 @@ export class RecipeService {
 	updateRecipe(i: number, newRecipe: Recipe) {
 		this.recipes[i] = newRecipe;
 		this.recipesChanges.next(this.recipes.slice());
-		console.log(this.recipes.slice());
+		//console.log(this.recipes.slice());
 		this.dataStorageService.saveRecipes(this.recipes.slice());
 	}
 
