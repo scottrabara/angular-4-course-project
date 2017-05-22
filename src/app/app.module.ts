@@ -14,22 +14,22 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AuthService } from "app/auth/auth.service";
 import { AuthGuard } from "app/auth/auth-guard.service";
-import { RecipesModule } from "app/recipes/recipes.module";
 import { SharedModule } from "app/shared/shared.module";
 import { ShoppingListModule } from "app/shopping_list/shopping-list.module";
 import { AuthModule } from "app/auth/auth.module";
 import { ShenanigansModule } from "app/shenanigans/shenanigans.module";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    headerComponent
+    headerComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     AppRoutingModule,
-    RecipesModule,
     ShoppingListModule,
     ShenanigansModule,
     SharedModule,
