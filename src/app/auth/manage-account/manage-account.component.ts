@@ -11,8 +11,10 @@ import { User } from "firebase/app";
 export class ManageAccountComponent implements OnInit {
 
   user: User;
+  verified: boolean = false;
   profileForm: FormGroup;
   authState;
+  message: string = "E-mail has not been verified! Click here to verify!";
 
   constructor(private auth: AuthService) { }
 
@@ -23,6 +25,7 @@ export class ManageAccountComponent implements OnInit {
     this.auth.getAuthState().subscribe(
       user => {
         this.user = this.auth.getUser();
+        this.verified = this.user.emailVerified;
         this.profileForm = new FormGroup({
           'username': new FormControl(this.user.displayName),
           'email': new FormControl(this.user.email),
@@ -41,8 +44,12 @@ export class ManageAccountComponent implements OnInit {
   }
 
   isVerified() {
+    return this.verified;
+  }
 
-    return this.user == null ? true : this.user.emailVerified;
+  onVerify() {
+    this.user.sendEmailVerification();
+    this.message = "Verification Email has been sent, please check your inbox."
   }
 
 }
