@@ -92,6 +92,6 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['..']);
+    this.router.navigate(['/recipes']);
   }
 }
