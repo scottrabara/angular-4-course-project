@@ -26,17 +26,13 @@ export class recipeListComponent implements OnInit {
 		this.recipesChangesSub = this.recipeService.recipesChanges.subscribe(
 			(recipes => {
 				this.recipes = recipes;
-				console.log(recipes);
+				//console.log(recipes);
 			})
 		);
 
 		this.recipes = this.recipeService.getRecipes();
-		console.log(this.recipes);
+		//console.log(this.recipes);
 	}
-
-	// onNew() {
-	// 	this.router.navigate(['new']);
-	// }
 
 	ngOnDestroy() {
 		this.recipesChangesSub.unsubscribe();
