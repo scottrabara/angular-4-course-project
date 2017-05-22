@@ -24,7 +24,7 @@ export class RecipeEditComponent implements OnInit {
   			this.id = +params['id'];
   			this.editMode = params['id'] != null;
   			this.initForm();
-        console.log(this.editMode);
+        //console.log(this.editMode);
   		}
   	);
   }
@@ -80,7 +80,7 @@ export class RecipeEditComponent implements OnInit {
                                  this.recipeForm.value['descrip'],
                                  this.recipeForm.value['imagePath'],
                                  this.recipeForm.value['ingredients']);
-    console.log(this.recipeForm);
+    //console.log(this.recipeForm);
     if (this.editMode) {
       this.rService.updateRecipe(this.id, this.recipeForm.value);
     }
