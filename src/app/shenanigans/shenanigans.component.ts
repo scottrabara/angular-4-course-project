@@ -17,7 +17,8 @@ export class ShenanigansComponent implements OnInit, AfterViewChecked, OnDestroy
   @ViewChild('text') textBox;
 
   messages: string[] = [];
-  sub: Subscription;
+  messageSub: Subscription;
+  authStateSub: Subscription;
   messageForm: FormGroup;
   // userName: string = 'RandomPerson' + Math.floor(Math.random() * + 10000);
   userName: string;
@@ -25,7 +26,7 @@ export class ShenanigansComponent implements OnInit, AfterViewChecked, OnDestroy
 
   ngOnInit() {
     //this.messages.push("Computer: Hello, start typing!");
-    this.sub = this.db.list('/messages').subscribe(
+    this.messageSub = this.db.list('/messages').subscribe(
       (messages) => {
         this.messages = [];
         for (let m of messages) {
@@ -44,8 +45,10 @@ export class ShenanigansComponent implements OnInit, AfterViewChecked, OnDestroy
     //   }
     // );
     this.db.app.auth().onAuthStateChanged(
-      () => {
-        this.userName = this.db.app.auth().currentUser.displayName;
+      (user) => {
+        if (user != null) {
+          this.userName = this.db.app.auth().currentUser.displayName;
+        }
       }
     );
   }
@@ -55,7 +58,7 @@ export class ShenanigansComponent implements OnInit, AfterViewChecked, OnDestroy
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.messageSub.unsubscribe();
   }
 
   onAdd() {
